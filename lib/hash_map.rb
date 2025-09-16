@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'node'
+
 # The HashMap class manages a custom implementation of the HashMap data structure.
 # It includes methods for calculating hashes, setting and getting values, etc.
 class HashMap
