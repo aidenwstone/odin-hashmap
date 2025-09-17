@@ -4,8 +4,8 @@
 # with a reference to the next node in the list.
 # This class is designed to be used with HashMap.
 class Node
-  attr_reader :key, :value
-  attr_accessor :next_node
+  attr_reader :key
+  attr_accessor :value, :next_node
 
   def initialize(key, value, next_node = nil)
     @key = key
