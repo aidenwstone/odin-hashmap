@@ -60,7 +60,19 @@ class HashMap
     nil
   end
 
-  def has?(key); end
+  def has?(key)
+    index = hash(key) % @capacity
+    raise IndexError if index.negative? || index >= @buckets.length
+
+    curr_node = @buckets[index]
+    while curr_node
+      return true if curr_node.key == key
+
+      curr_node = curr_node.next_node
+    end
+
+    false
+  end
 
   def remove(key); end
 
