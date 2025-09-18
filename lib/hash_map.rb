@@ -46,7 +46,19 @@ class HashMap
     end
   end
 
-  def get(key); end
+  def get(key)
+    index = hash(key) % @capacity
+    raise IndexError if index.negative? || index >= @buckets.length
+
+    curr_node = @buckets[index]
+    while curr_node
+      return curr_node.value if curr_node.key == key
+
+      curr_node = curr_node.next_node
+    end
+
+    nil
+  end
 
   def has?(key); end
 
