@@ -23,7 +23,28 @@ class HashMap
     hash_code
   end
 
-  def set(key, value); end
+  def set(key, value) # rubocop:disable Metrics/MethodLength
+    index = hash(key) % @capacity
+    head_node = @buckets[index]
+    raise IndexError if index.negative? || index >= @buckets.length
+
+    curr_node = head_node
+    while curr_node
+      if curr_node.key == key
+        curr_node.value = value
+        return
+      end
+
+      curr_node = curr_node.next_node
+    end
+
+    @buckets[index] = Node.new(key, value, head_node)
+    @length += 1
+
+    if @length > @capacity * @load_factor # rubocop:disable Style/GuardClause
+      # TODO: Grow the bucket size
+    end
+  end
 
   def get(key); end
 
