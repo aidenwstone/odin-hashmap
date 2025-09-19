@@ -41,9 +41,7 @@ class HashMap
     @buckets[index] = Node.new(key, value, head_node)
     @length += 1
 
-    if @length > @capacity * @load_factor # rubocop:disable Style/GuardClause
-      # TODO: Grow the bucket size
-    end
+    grow_buckets if @length > @capacity * @load_factor
   end
 
   def get(key)
@@ -127,5 +125,16 @@ class HashMap
 
   def entries
     keys.zip(values)
+  end
+
+  private
+
+  def grow_buckets
+    @capacity *= 2
+    curr_entries = entries
+
+    clear
+
+    curr_entries.each { |entry| set(*entry) }
   end
 end
