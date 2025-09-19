@@ -125,5 +125,7 @@ class HashMap
     end
   end
 
-  def entries; end
+  def entries
+    keys.zip(values)
+  end
 end
