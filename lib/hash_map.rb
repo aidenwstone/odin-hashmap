@@ -102,7 +102,10 @@ class HashMap
     nil
   end
 
-  def clear; end
+  def clear
+    @buckets = Array.new(@capacity)
+    @length = 0
+  end
 
   def keys; end
 
