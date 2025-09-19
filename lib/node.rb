@@ -12,4 +12,8 @@ class Node
     @value = value
     @next_node = next_node
   end
+
+  def inspect
+    "(#{@key}: #{@value.inspect}) -> #{@next_node.inspect}"
+  end
 end
