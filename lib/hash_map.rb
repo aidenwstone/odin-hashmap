@@ -116,7 +116,14 @@ class HashMap
     end
   end
 
-  def values; end
+  def values
+    @buckets.compact.each_with_object([]) do |curr_node, values|
+      while curr_node
+        values << curr_node.value
+        curr_node = curr_node.next_node
+      end
+    end
+  end
 
   def entries; end
 end
