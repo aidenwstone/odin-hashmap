@@ -74,7 +74,33 @@ class HashMap
     false
   end
 
-  def remove(key); end
+  def remove(key) # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
+    index = hash(key) % @capacity
+    raise IndexError if index.negative? || index >= @buckets.length
+
+    curr_node = @buckets[index]
+    return nil unless curr_node
+
+    if curr_node.key == key
+      @buckets[index] = curr_node.next_node
+      @length -= 1
+      return curr_node.value
+    end
+
+    prev_node = nil
+    while curr_node
+      if curr_node.key == key
+        prev_node.next_node = curr_node.next_node
+        @length -= 1
+        return curr_node.value
+      end
+
+      prev_node = curr_node
+      curr_node = curr_node.next_node
+    end
+
+    nil
+  end
 
   def clear; end
 
