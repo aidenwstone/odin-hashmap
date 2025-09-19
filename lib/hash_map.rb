@@ -14,6 +14,10 @@ class HashMap
     @length = 0
   end
 
+  def to_s
+    @buckets.map(&:inspect).join("\n")
+  end
+
   def hash(key)
     hash_code = 0
     prime_number = 31
