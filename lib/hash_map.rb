@@ -107,7 +107,14 @@ class HashMap
     @length = 0
   end
 
-  def keys; end
+  def keys
+    @buckets.compact.each_with_object([]) do |curr_node, keys|
+      while curr_node
+        keys << curr_node.key
+        curr_node = curr_node.next_node
+      end
+    end
+  end
 
   def values; end
 
